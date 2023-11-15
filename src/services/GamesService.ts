@@ -1,7 +1,7 @@
 import { log } from 'console'
 import { type Games } from '../entity/Game'
 import { gameRepository } from '../repositories/GameRepository'
-import TGames from '../types/Games'
+import type TGames from '../types/Games'
 
 const gamesService = {
   findAll: async (): Promise<Games[]> => {
@@ -12,6 +12,13 @@ const gamesService = {
   },
   save: async (body: TGames) => {
     return await gameRepository.save(body)
+  },
+  update: async (body: TGames) => {
+    return await gameRepository.update(body.id, body)
+  },
+  remove: async (id: string) => {
+    const game = await gameRepository.findOne({ where: { id } })
+    return await gameRepository.remove(game)
   }
 }
 

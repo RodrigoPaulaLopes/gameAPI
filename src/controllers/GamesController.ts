@@ -14,5 +14,15 @@ export const gamesController = {
     const { body } = req
     const savedBook = await gamesService.save(body)
     res.status(201).json({ body: savedBook })
+  },
+  update: async (req: Request, res: Response) => {
+    const { body } = req
+    const updatedBook = await gamesService.update(body)
+    res.status(200).json({ body: updatedBook })
+  },
+  remove: async (req: Request, res: Response) => {
+    const { id } = req.params
+    const deleted = await gamesService.remove(id)
+    res.status(204).json({ body: deleted })
   }
 }
