@@ -1,4 +1,3 @@
-import { log } from 'console'
 import { type Games } from '../entity/Game'
 import { gameRepository } from '../repositories/GameRepository'
 import type TGames from '../types/Games'
