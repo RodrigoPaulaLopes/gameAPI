@@ -1,8 +1,11 @@
+import { log } from "console"
+import { AppDataSource } from "../../src/data-source"
+import { Games } from "../../src/entity/Game"
+import { testServer } from "../jest.setup"
 
-import gamesService from "../../src/services/GamesService"
-import { AppDataSource } from '../../src/data-source';
-describe("Deve retornar todos os testes do games service ", () => {
 
+describe("Teste Na Rota /api/games ", () => {
+    const id = '4be67e5c-33bf-4006-bf29-ca37bde23647'
     const objetos = [
         {
           "id": "4be67e5c-33bf-4006-bf29-ca37bde23647",
@@ -130,23 +133,27 @@ describe("Deve retornar todos os testes do games service ", () => {
         }
       ]
     beforeAll(async () => {
-        
         await AppDataSource.initialize()
-    });
-    afterAll(async () => {
-      await AppDataSource.destroy()
-  })
-
-    it("Deve retornar uma lista de games", async () => {
-
-        const response = await gamesService.findAll()
-
-        expect(response).toEqual(objetos)
     })
-    it("Deve retornar um game", async () => {
-        const response = await gamesService.find('b0ec66f0-18a3-476a-9a18-4e3292cc9935')
 
+    afterAll(async () => {
+        await AppDataSource.destroy()
+    })
+    it('Deve Fazer Uma Chamada GET para a rota /api/games e retornar todos os objetos', async () => {
 
-        expect(response?.id).toEqual('b0ec66f0-18a3-476a-9a18-4e3292cc9935')
+        const resposta = await testServer.get('/api/games').expect(200)
+        const body = resposta.body.body
+
+    
+        expect(body).toEqual(objetos)
+    })
+
+    it('Deve fazer uma chamada GET para rota /api/games/:id e retornar um game pelo id', async () => {
+        
+        const resposta = await testServer.get(`/api/games/${id}`).expect(200)
+
+        const body = resposta.body.body
+
+        expect(body.id).toEqual(id)
     })
 })
