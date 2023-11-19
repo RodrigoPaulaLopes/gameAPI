@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, Table } from 'typeorm'
+import { type GameDTO } from '../dto/CreateGameDTO'
 
 @Entity()
 export class Games {
@@ -43,4 +44,8 @@ export class Games {
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
     price: number
+
+  constructor (props: Omit<GameDTO, 'id'>) {
+    Object.assign(this, props)
+  }
 }

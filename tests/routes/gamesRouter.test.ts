@@ -142,7 +142,7 @@ describe("Teste Na Rota /api/games ", () => {
     it('Deve Fazer Uma Chamada GET para a rota /api/games e retornar todos os objetos', async () => {
 
         const resposta = await testServer.get('/api/games').expect(200)
-        const body = resposta.body.body
+        const body = resposta.body.content
 
     
         expect(body).toEqual(objetos)
@@ -152,7 +152,7 @@ describe("Teste Na Rota /api/games ", () => {
         
         const resposta = await testServer.get(`/api/games/${id}`).expect(200)
 
-        const body = resposta.body.body
+        const body = resposta.body.content
 
         expect(body.id).toEqual(id)
     })
