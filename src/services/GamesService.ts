@@ -1,7 +1,9 @@
-import { type Games } from '../entity/Game'
-import { gameRepository } from '../repositories/GameRepository'
+import { Games } from '../entity/Game'
+import { repository } from '../repositories/Repository'
 import type TGames from '../types/Games'
 
+
+const gameRepository = repository(Games)
 const gamesService = {
   findAll: async (): Promise<Games[]> => {
     return await gameRepository.find()
