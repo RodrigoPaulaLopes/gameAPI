@@ -1,3 +1,4 @@
+import { log } from 'console'
 import { type GameDTO } from '../dto/CreateGameDTO'
 import { Games } from '../entity/Game'
 import { repository } from '../repositories/Repository'

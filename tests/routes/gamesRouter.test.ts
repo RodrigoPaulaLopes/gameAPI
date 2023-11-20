@@ -156,4 +156,12 @@ describe("Teste Na Rota /api/games ", () => {
 
         expect(body.id).toEqual(id)
     })
+    it('Deve fazer uma chamada GET para rota /api/games/:id e retornar um que o game não foi encontrado', async () => {
+        
+      const resposta = await testServer.get(`/api/games/1234`).expect(400)
+
+      const body = resposta.body.content
+
+      expect(body).toEqual('Game não encontrado!')
+  })
 })

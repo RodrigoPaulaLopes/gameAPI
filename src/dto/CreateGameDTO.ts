@@ -1,16 +1,16 @@
 export class GameDTO {
-  id: string
+  id?: string
   nome: string
   descricao: string
-  dataLancamento: string
+  data_lancamento: string
   genero: string
   plataforma: string[]
-  classificacaoEtaria: number
+  classificacao_etaria: number
   desenvolvedor: string
   editora: string
   avaliacao: number
-  capaImagem: string
-  requerimentoSistema: { minimum: string, recommended: string }
-  modosJogo: string[]
+  capa_imagem: string
+  requerimento_sistema: { minimum: string, recommended: string }
+  modos_jogo: string[]
   price: number
 }

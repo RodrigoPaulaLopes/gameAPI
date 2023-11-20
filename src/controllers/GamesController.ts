@@ -7,8 +7,19 @@ export const gamesController = {
     res.status(200).json({ content: games })
   },
   find: async (req: Request, res: Response) => {
-    const { id } = req.params
-    res.status(200).json({ content: await gamesService.find(id) })
+    try {
+      const { id } = req.params
+      const game = await gamesService.find(id)
+      console.log(game);
+      
+      if (game === null) {
+        res.status(400).json({ content: 'Game não encontrado!' })
+      }
+
+      res.status(200).json({ content: game })
+    } catch (error) {
+      console.log(error)
+    }
   },
   create: async (req: Request, res: Response) => {
     const { body } = req
